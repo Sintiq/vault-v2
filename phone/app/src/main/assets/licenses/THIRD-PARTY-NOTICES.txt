@@ -1,0 +1,115 @@
+Vault V2 Android - third-party components
+
+Vault V2 original code: Vault-V2-MIT.txt.
+The original application's MIT license does not replace third-party terms.
+
+Runtime inventory below comes from the release package dependency model.
+Each Apache-labeled component maps to the full Apache-2.0.txt in this directory.
+NanoHTTPD and Checker Framework have their own exact published license texts.
+Health Connect also embeds relocated protobuf 3.22.3, covered separately by
+Protobuf-3.22.3.txt, not merely by Health Connect's Apache license.
+
+Kotlin 2.0.21 common/JVM standard-library supplemental attributions:
+GWT-derived collections: Copyright 2007-2008 Google Inc.; Apache-2.0.txt.
+Guava-derived unsigned utilities: Copyright 2011 The Guava Authors;
+Apache-2.0.txt.
+Boost-derived JVM math: Copyright Eric Ford and Hubert Holin 2001;
+Kotlin-Boost.txt (Boost Software License 1.0).
+Upstream source-to-license mapping:
+https://raw.githubusercontent.com/JetBrains/kotlin/v2.0.21/license/README.md
+Boost text:
+https://raw.githubusercontent.com/JetBrains/kotlin/v2.0.21/license/third_party/boost_LICENSE.txt
+
+OkHttp also carries Public Suffix List data under Mozilla Public License 2.0.
+Its upstream notice remains in the APK at okhttp3/internal/publicsuffix/NOTICE.
+https://raw.githubusercontent.com/square/okhttp/parent-4.12.0/okhttp/src/main/resources/okhttp3/internal/publicsuffix/NOTICE
+The corresponding source data is included here as OkHttp-Public-Suffix-List.dat;
+the full license is Mozilla-Public-License-2.0.txt. Its 9499 normal rules and
+8 exception rules match the unchanged data shipped by OkHttp 4.12.0.
+Immutable source:
+https://raw.githubusercontent.com/square/okhttp/40cb04338da423f7f73e83025717652ed35b7896/okhttp/src/test/resources/okhttp3/internal/publicsuffix/public_suffix_list.dat
+
+Notice text origins:
+Apache-2.0.txt:
+https://raw.githubusercontent.com/square/okhttp/parent-4.12.0/LICENSE.txt
+NanoHTTPD-2.3.1.txt:
+org.nanohttpd:nanohttpd:2.3.1 published JAR, LICENSE.txt
+Checker-Qual-3.12.0.txt:
+org.checkerframework:checker-qual:3.12.0 published JAR, META-INF/LICENSE.txt
+Protobuf-3.22.3.txt:
+https://raw.githubusercontent.com/protocolbuffers/protobuf/v22.3/LICENSE
+
+This is a private qualification candidate, not a cleared public release.
+The native-source review for graphics-path 1.0.1 is incomplete because its
+release source endpoint was unavailable; its published POM declares Apache 2.0.
+
+Runtime coordinates and principal license texts (69):
+androidx.health.connect:connect-client:1.1.0-alpha07@aar -> Apache-2.0.txt
+androidx.activity:activity:1.9.3@aar -> Apache-2.0.txt
+androidx.compose.material3:material3-android:1.3.1@aar -> Apache-2.0.txt
+androidx.compose.material:material-ripple-android:1.7.5@aar -> Apache-2.0.txt
+androidx.compose.foundation:foundation-android:1.7.5@aar -> Apache-2.0.txt
+androidx.compose.animation:animation-android:1.7.5@aar -> Apache-2.0.txt
+androidx.compose.foundation:foundation-layout-android:1.7.5@aar -> Apache-2.0.txt
+androidx.compose.animation:animation-core-android:1.7.5@aar -> Apache-2.0.txt
+androidx.compose.ui:ui-unit-android:1.7.5@aar -> Apache-2.0.txt
+androidx.compose.ui:ui-geometry-android:1.7.5@aar -> Apache-2.0.txt
+androidx.compose.ui:ui-util-android:1.7.5@aar -> Apache-2.0.txt
+androidx.compose.ui:ui-text-android:1.7.5@aar -> Apache-2.0.txt
+androidx.compose.ui:ui-graphics-android:1.7.5@aar -> Apache-2.0.txt
+androidx.compose.material:material-icons-extended-android:1.7.5@aar -> Apache-2.0.txt
+androidx.compose.material:material-icons-core-android:1.7.5@aar -> Apache-2.0.txt
+androidx.compose.ui:ui-android:1.7.5@aar -> Apache-2.0.txt
+androidx.activity:activity-ktx:1.9.3@aar -> Apache-2.0.txt
+androidx.activity:activity-compose:1.9.3@aar -> Apache-2.0.txt
+org.jetbrains.kotlinx:kotlinx-serialization-core-jvm:1.7.3@jar -> Apache-2.0.txt
+org.jetbrains.kotlinx:kotlinx-serialization-json-jvm:1.7.3@jar -> Apache-2.0.txt
+androidx.emoji2:emoji2:1.3.0@aar -> Apache-2.0.txt
+androidx.lifecycle:lifecycle-process:2.8.7@aar -> Apache-2.0.txt
+androidx.lifecycle:lifecycle-common-jvm:2.8.7@jar -> Apache-2.0.txt
+androidx.lifecycle:lifecycle-livedata-core:2.8.7@aar -> Apache-2.0.txt
+androidx.autofill:autofill:1.0.0@aar -> Apache-2.0.txt
+androidx.graphics:graphics-path:1.0.1@aar -> Apache-2.0.txt
+androidx.customview:customview-poolingcontainer:1.0.0@aar -> Apache-2.0.txt
+androidx.core:core-ktx:1.13.1@aar -> Apache-2.0.txt
+androidx.core:core:1.13.1@aar -> Apache-2.0.txt
+androidx.lifecycle:lifecycle-runtime-android:2.8.7@aar -> Apache-2.0.txt
+androidx.lifecycle:lifecycle-viewmodel-android:2.8.7@aar -> Apache-2.0.txt
+androidx.lifecycle:lifecycle-runtime-ktx-android:2.8.7@aar -> Apache-2.0.txt
+androidx.lifecycle:lifecycle-common-java8:2.8.7@jar -> Apache-2.0.txt
+androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.7@aar -> Apache-2.0.txt
+androidx.lifecycle:lifecycle-runtime-compose-android:2.8.7@aar -> Apache-2.0.txt
+androidx.lifecycle:lifecycle-viewmodel-savedstate:2.8.7@aar -> Apache-2.0.txt
+androidx.savedstate:savedstate:1.2.1@aar -> Apache-2.0.txt
+androidx.savedstate:savedstate-ktx:1.2.1@aar -> Apache-2.0.txt
+androidx.compose.runtime:runtime-saveable-android:1.7.5@aar -> Apache-2.0.txt
+androidx.compose.runtime:runtime-android:1.7.5@aar -> Apache-2.0.txt
+androidx.annotation:annotation-experimental:1.4.1@aar -> Apache-2.0.txt
+androidx.profileinstaller:profileinstaller:1.3.1@aar -> Apache-2.0.txt
+androidx.startup:startup-runtime:1.1.1@aar -> Apache-2.0.txt
+androidx.tracing:tracing:1.0.0@aar -> Apache-2.0.txt
+androidx.concurrent:concurrent-futures:1.1.0@jar -> Apache-2.0.txt
+androidx.collection:collection-ktx:1.4.4@jar -> Apache-2.0.txt
+androidx.versionedparcelable:versionedparcelable:1.1.1@aar -> Apache-2.0.txt
+androidx.collection:collection-jvm:1.4.4@jar -> Apache-2.0.txt
+androidx.arch.core:core-runtime:2.2.0@aar -> Apache-2.0.txt
+androidx.arch.core:core-common:2.2.0@jar -> Apache-2.0.txt
+androidx.interpolator:interpolator:1.0.0@aar -> Apache-2.0.txt
+androidx.annotation:annotation-jvm:1.8.1@jar -> Apache-2.0.txt
+com.squareup.okhttp3:okhttp:4.12.0@jar -> Apache-2.0.txt
+com.squareup.okio:okio-jvm:3.6.0@jar -> Apache-2.0.txt
+org.jetbrains.kotlinx:kotlinx-coroutines-guava:1.7.3@jar -> Apache-2.0.txt
+org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3@jar -> Apache-2.0.txt
+org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.7.3@jar -> Apache-2.0.txt
+org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.9.10@jar -> Apache-2.0.txt
+org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.9.10@jar -> Apache-2.0.txt
+org.jetbrains.kotlin:kotlin-stdlib:2.0.21@jar -> Apache-2.0.txt
+org.nanohttpd:nanohttpd:2.3.1@jar -> NanoHTTPD-2.3.1.txt
+org.jetbrains:annotations:23.0.0@jar -> Apache-2.0.txt
+com.google.guava:guava:31.1-android@jar -> Apache-2.0.txt
+com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava@jar -> Apache-2.0.txt
+com.google.guava:failureaccess:1.0.1@jar -> Apache-2.0.txt
+com.google.code.findbugs:jsr305:3.0.2@jar -> Apache-2.0.txt
+org.checkerframework:checker-qual:3.12.0@jar -> Checker-Qual-3.12.0.txt
+com.google.errorprone:error_prone_annotations:2.11.0@jar -> Apache-2.0.txt
+com.google.j2objc:j2objc-annotations:1.3@jar -> Apache-2.0.txt

@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vault-v2"
+version = "0.1.0"
+description = "Vault V2 — three-pane local explorer with a gatekept agent"
+license = "MIT"
+license-files = ["LICENSE"]
+requires-python = ">=3.12"
+dependencies = ["PySide6>=6.6", "pypdfium2==5.13.0", "pypdf[crypto]>=6.19", "Pillow>=12.3"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "mcp==2.2.0"]
+phone-door = ["mcp==2.2.0"]
+
+[tool.setuptools]
+include-package-data = false
+
+[tool.setuptools.packages.find]
+include = ["vault_v2", "vault_v2.*"]
+namespaces = false
+
+[tool.setuptools.package-data]
+vault_v2 = ["release_key.pub", "ocr_models/*.traineddata", "ocr_models/LICENSE", "web/*.html", "web/*.js", "web/*.css", "web/*.svg", "web/*.webmanifest", "web/icon-192.png", "web/icon-512.png"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

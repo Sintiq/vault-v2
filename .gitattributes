@@ -1,0 +1,6 @@
+# Retain upstream license text bytes across Windows checkouts.
+phone/app/src/main/assets/licenses/*.txt text eol=lf
+phone/app/src/main/assets/licenses/*.dat -text
+# Native qualification pins hash the recipe's exact source bytes.
+tools/windows/vault-v2.iss text eol=lf
+licenses/MSVC-RECIPIENT-TERMS.txt text eol=lf

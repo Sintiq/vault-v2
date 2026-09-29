@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  The vault is reached at a Tailscale address, which is already an encrypted,
+  device-authenticated tunnel; there is no certificate authority inside a
+  tailnet unless the owner turns on Tailscale HTTPS. Plain HTTP is therefore
+  permitted, and it can only ever go to the address the owner typed in.
+-->
+<network-security-config>
+    <base-config cleartextTrafficPermitted="true">
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+    </base-config>
+</network-security-config>

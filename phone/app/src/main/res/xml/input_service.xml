@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Deliberately the narrowest accessibility service the platform allows.
+
+  accessibilityEventTypes is left out entirely — there is no "none" flag, and
+  omitting it subscribes to nothing. This service is never told what happens
+  on the screen, and asks for nothing about it. canPerformGestures is the one
+  capability it wants: a finger, and nothing else.
+
+  canRetrieveWindowContent is false on purpose. With it, the app could read
+  every screen in every app; without it, it cannot, whatever the code says.
+-->
+<accessibility-service xmlns:android="http://schemas.android.com/apk/res/android"
+    android:accessibilityFeedbackType="feedbackGeneric"
+    android:canPerformGestures="true"
+    android:canRetrieveWindowContent="false"
+    android:description="@string/input_service_description"
+    android:notificationTimeout="0" />

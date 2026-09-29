@@ -1,0 +1,82 @@
+MICROSOFT RUNTIME COMPONENT TERMS
+Version 2026-09-28
+
+SCOPE
+
+These component terms are provided by the Vault V2 project publisher, identified
+in this release as "Vault V2 contributors". They apply only to the Microsoft
+runtime files bundled with this Vault V2 release (the "Microsoft Components"):
+
+concrt140.dll, msvcp140.dll, msvcp140_1.dll, msvcp140_2.dll,
+msvcp140_codecvt_ids.dll, vccorlib140.dll, vcruntime140.dll,
+vcruntime140_1.dll, vcamp140.dll, and vcomp140.dll.
+
+Their supplied version is 14.51.36247.0. The accompanying runtime-redist.json
+identifies the exact files and bundled copies covered by these terms. These
+terms are not a license for Visual Studio and do not require a Visual Studio
+account or purchase to run Vault V2.
+
+PERMITTED USE AND DISTRIBUTION
+
+You may install, copy and use the Microsoft Components as part of Vault V2.
+You may pass on unmodified copies as part of Vault V2, retaining these terms
+and all Microsoft and supplier notices, provided your distributors and external
+end users agree to these terms. This grant does not permit distributing the
+components on their own or incorporating them into a different application.
+Rights you obtain separately from Microsoft are unaffected.
+
+COMPONENT PROTECTIONS
+
+Microsoft and its suppliers retain their rights in the Microsoft Components.
+Unless overriding law gives you additional rights, or applicable third-party
+open-source terms require otherwise,
+do not alter these components, evade their technical restrictions, reverse
+engineer, decompile, disassemble, or attempt to recover their source. Retain
+Microsoft and supplier copyright, patent, trademark and other notices without
+removing, hiding or changing them. Do not separately rent, lease or sublicense
+the components, or transfer them beyond the permission above.
+
+Do not use Microsoft branding to imply that Vault V2 is made or endorsed by
+Microsoft. Do not impose conditions on Microsoft component source that require
+its disclosure or distribution in source form, or grant others modification
+rights in it. This restriction does not change the independent licensing of
+Vault V2 or other open-source components.
+
+Use and distribute the Microsoft Components lawfully, including compliance with
+applicable trade laws, export controls, sanctions, and destination, end-user
+and end-use restrictions. Do not supply them to prohibited recipients or
+destinations without the required governmental authorization.
+
+WARRANTIES, LIABILITY AND MANDATORY RIGHTS
+
+To the extent the law allows, the Microsoft Components are supplied without
+warranties, guarantees or conditions, including implied merchantability,
+fitness for a particular purpose and noninfringement. To that same extent,
+Microsoft and its suppliers' liability concerning these components is limited
+to direct damages of US $5. Indirect, incidental, special and consequential
+damages and lost profits are excluded, across legal theories and even where
+the possibility of such loss was known. Microsoft and its suppliers are intended
+beneficiaries of these component protections.
+
+These limitations do not remove statutory rights that cannot lawfully be
+excluded or limited. Mandatory consumer guarantees and non-excludable liability,
+including for personal injury, intentional misconduct or gross negligence where
+applicable, remain. Nothing here restricts rights that overriding law grants
+you. These provisions concern the Microsoft Components, not a new liability
+limit on the independently licensed Vault V2 code.
+
+OTHER LICENSES ARE UNCHANGED
+
+The MIT license for Vault V2 and the separate licenses of Python, Qt, PySide,
+Shiboken and other components remain in force. These terms do not prohibit
+exercising LGPL rights to inspect, modify, replace or relink LGPL-covered
+libraries, or to reverse engineer the combined work for debugging modifications
+to those libraries. They do not grant extra rights in Microsoft Components.
+
+YOUR CHOICE
+
+Accept this agreement in the installer only if you agree to these component
+terms. If you decline, cancel installation and do not install, use or distribute
+the Microsoft Components under this grant. Declining does not take away your
+independent rights under the open-source licenses. No online account, telemetry
+consent, payment, or subscription is created by accepting these terms.

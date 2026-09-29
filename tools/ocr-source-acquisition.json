@@ -1,0 +1,41 @@
+{
+  "schema": "vault-ocr-source-acquisition-evidence@1",
+  "date": "2026-09-27",
+  "complete": false,
+  "binary_source_correspondence_attested": false,
+  "upstream_code_executed": false,
+  "archives": [
+    {
+      "file": "cysignals-1.12.6.tar.gz",
+      "url": "https://files.pythonhosted.org/packages/b9/5a/d258fd8d6ee1538b8472f39051a87d3d6aa2ab26ffa2da4ac809fb851b88/cysignals-1.12.6.tar.gz",
+      "size": 79583,
+      "sha256": "3ef3a37bdb244821b85475a08e2762ca1019570b369e321504995fa9a54675ce",
+      "verification": "Matches maintainer PyPI release metadata size and SHA256",
+      "verification_url": "https://pypi.org/pypi/cysignals/1.12.6/json"
+    },
+    {
+      "file": "tesserocr-windows_build-cb737e34870e2568da274ac89e1b11db2c52aad8.tar.gz",
+      "url": "https://codeload.github.com/simonflueckiger/tesserocr-windows_build/tar.gz/cb737e34870e2568da274ac89e1b11db2c52aad8",
+      "size": 19844,
+      "sha256": "0ade91bb7a8155fa14cc79f64afb30c2b5466e528c4b717b3f116af5bf639c71",
+      "verification": "Commit-addressed HTTPS acquisition; recipe and three selected patches additionally match primary Git tree blob IDs; local archive SHA256 is not an independently published digest",
+      "commit": "cb737e34870e2568da274ac89e1b11db2c52aad8"
+    },
+    {
+      "file": "tesserocr-d27f2e394c79739c75b062fc150b08f420300ab6.tar.gz",
+      "url": "https://codeload.github.com/sirfz/tesserocr/tar.gz/d27f2e394c79739c75b062fc150b08f420300ab6",
+      "size": 75351,
+      "sha256": "8742b65af283174f5b86cd95176e35e817fa0ef79ee789245350a844dd168924",
+      "verification": "Publisher Git tree submodule target; three patch-target source files match primary Git blob IDs; local archive SHA256 is not an independently published digest",
+      "commit": "d27f2e394c79739c75b062fc150b08f420300ab6"
+    }
+  ],
+  "local_checks": {
+    "cysignals_plain_python_files_equal": 2,
+    "cysignals_sdist_license_matches_payload": true,
+    "git_apply_check_patch_count": 3,
+    "git_apply_check_exit_code": 0,
+    "patch_target_and_patch_files_unchanged": 6,
+    "native_cysignals_rebuild_performed": false
+  }
+}

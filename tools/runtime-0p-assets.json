@@ -1,0 +1,130 @@
+{
+  "schema": "vault-v2-runtime-assets@1",
+  "checked_date": "2026-09-26",
+  "target": "CPython 3.14 Windows AMD64 (standard GIL build)",
+  "security_status": "3.14.7 is the current official 3.14 maintenance binary checked 2026-09-26; synthetic candidate only, clean-machine and release qualification remain OPEN",
+  "assets": [
+    {
+      "kind": "embedded",
+      "filename": "python-3.14.7-embed-amd64.zip",
+      "url": "https://www.python.org/ftp/python/3.14.7/python-3.14.7-embed-amd64.zip",
+      "sha256": "d297e5ff019966817ad8502465176139f2d3d840fa4ed84b13bed399a6ab1f15",
+      "size": 12673227,
+      "metadata_source": "https://www.python.org/ftp/python/3.14.7/python-3.14.7-embed-amd64.zip.spdx.json",
+      "size_source": "HTTPS Content-Length of exact artifact; must also match downloaded bytes"
+    },
+    {
+      "kind": "wheel",
+      "filename": "pyside6_essentials-6.11.2-cp310-abi3-win_amd64.whl",
+      "url": "https://files.pythonhosted.org/packages/dc/09/d2662684aee4d3f027ff9b1e965f22301bc28ffc5b7f167658508e4475dc/pyside6_essentials-6.11.2-cp310-abi3-win_amd64.whl",
+      "sha256": "c8a29def77032773a30879f7f24415b5395ad08592d147c170824ef4c735dfc1",
+      "size": 76913043,
+      "metadata_source": "https://pypi.org/pypi/PySide6_Essentials/6.11.2/json"
+    },
+    {
+      "kind": "wheel",
+      "filename": "shiboken6-6.11.2-cp310-abi3-win_amd64.whl",
+      "url": "https://files.pythonhosted.org/packages/ce/6b/fee1b4814317e4664e318644c9c007676c65a71e5b2b9d3ac4121a94dc0a/shiboken6-6.11.2-cp310-abi3-win_amd64.whl",
+      "sha256": "6ab0eba1c904455df621f9a6df3ca2bb896bab8670572d2bc4e37804ae91f19a",
+      "size": 1226578,
+      "metadata_source": "https://pypi.org/pypi/shiboken6/6.11.2/json"
+    },
+    {
+      "kind": "wheel",
+      "filename": "pypdfium2-5.13.0-py3-none-win_amd64.whl",
+      "url": "https://files.pythonhosted.org/packages/5d/99/a37b6b902457569468ed5908c94e56cb6c4032541f02cf89f723d42a9148/pypdfium2-5.13.0-py3-none-win_amd64.whl",
+      "sha256": "47dcca2a8d507b5fd24f94c3c9d48fb379430f097bc20f01beff6c963ffbcedb",
+      "size": 3885553,
+      "metadata_source": "https://pypi.org/pypi/pypdfium2/5.13.0/json"
+    },
+    {
+      "kind": "wheel",
+      "filename": "pypdf-6.19.0-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/3c/2c/c43c03eaf630435f023f1dc61ec4a4a78951ad5530a62c71cc89bde307b7/pypdf-6.19.0-py3-none-any.whl",
+      "sha256": "7e5d6e730e7dae87d560a2cee218b852f6498c8be61966f3cd02ead971e48d14",
+      "size": 395480,
+      "metadata_source": "https://pypi.org/pypi/pypdf/6.19.0/json"
+    },
+    {
+      "kind": "wheel",
+      "filename": "pillow-12.3.0-cp314-cp314-win_amd64.whl",
+      "url": "https://files.pythonhosted.org/packages/f1/e0/492879f69d94f91f60fc8cd05ba03650e9520afebb2fb7aa12777d7c7f38/pillow-12.3.0-cp314-cp314-win_amd64.whl",
+      "sha256": "fdafc9cce40277e0f7a0feabce0ee50dd2fa1800f3b38015e51296b5e814048d",
+      "size": 7237707,
+      "metadata_source": "https://pypi.org/pypi/Pillow/12.3.0/json"
+    },
+    {
+      "kind": "wheel",
+      "filename": "cryptography-50.0.1-cp39-abi3-win_amd64.whl",
+      "url": "https://files.pythonhosted.org/packages/99/89/87ef49ffe383ef4e147d27b7bf2088fb0b54ea409dd87b5a89442e5828a5/cryptography-50.0.1-cp39-abi3-win_amd64.whl",
+      "sha256": "55d16b1ef3ee0958d893a977b19777887e546c9954ea81b200c3301a864013f2",
+      "size": 3875429,
+      "metadata_source": "https://pypi.org/pypi/cryptography/50.0.1/json"
+    },
+    {
+      "kind": "wheel",
+      "filename": "cffi-2.1.1-cp314-cp314-win_amd64.whl",
+      "url": "https://files.pythonhosted.org/packages/a7/06/1c3e01e3ba14c39f6d10bfbac52753b7e22259e38088e5cfe1d704918690/cffi-2.1.1-cp314-cp314-win_amd64.whl",
+      "sha256": "3222ba5d678f80a030e6afbcc33dc1ae5cb45facabb61cee2c7016b8432fde48",
+      "size": 187949,
+      "metadata_source": "https://pypi.org/pypi/cffi/2.1.1/json"
+    },
+    {
+      "kind": "wheel",
+      "filename": "pycparser-3.0-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/0c/c3/44f3fbbfa403ea2a7c779186dc20772604442dde72947e7d01069cbe98e3/pycparser-3.0-py3-none-any.whl",
+      "sha256": "b727414169a36b7d524c1c3e31839a521725078d7b2ff038656844266160a992",
+      "size": 48172,
+      "metadata_source": "https://pypi.org/pypi/pycparser/3.0/json"
+    },
+    {
+      "kind": "wheel",
+      "filename": "qrcode-8.2-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/dd/b8/d2d6d731733f51684bbf76bf34dab3b70a9148e8f2cef2bb544fccec681a/qrcode-8.2-py3-none-any.whl",
+      "sha256": "16e64e0716c14960108e85d853062c9e8bba5ca8252c0b4d0231b9df4060ff4f",
+      "size": 45986,
+      "metadata_source": "https://pypi.org/pypi/qrcode/8.2/json"
+    },
+    {
+      "kind": "wheel",
+      "filename": "colorama-0.4.6-py2.py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/d1/d6/3965ed04c63042e047cb6a3e6ed1a63a35087b6a609aa3a15ed8ac56c221/colorama-0.4.6-py2.py3-none-any.whl",
+      "sha256": "4f1d9991f5acc0ca119f9d443620b77f9d6b33703e51011c16baf57afb285fc6",
+      "size": 25335,
+      "metadata_source": "https://pypi.org/pypi/colorama/0.4.6/json",
+      "reason": "qrcode requires colorama on win32"
+    },
+    {
+      "kind": "wheel",
+      "filename": "tesserocr-2.11.0-cp314-cp314-win_amd64.whl",
+      "url": "https://github.com/simonflueckiger/tesserocr-windows_build/releases/download/tesserocr-v2.11.0-tesseract-5.5.3/tesserocr-2.11.0-cp314-cp314-win_amd64.whl",
+      "sha256": "823215ecc09a7bd3f62e8c374fcad3cc2e22ec4dbda076a6c73037392b1fa3ed",
+      "size": 4365116,
+      "metadata_source": "https://api.github.com/repos/simonflueckiger/tesserocr-windows_build/releases/tags/tesserocr-v2.11.0-tesseract-5.5.3"
+    },
+    {
+      "kind": "model",
+      "filename": "eng.traineddata",
+      "url": "https://raw.githubusercontent.com/tesseract-ocr/tessdata_fast/87416418657359cb625c412a48b6e1d6d41c29bd/eng.traineddata",
+      "sha256": "7d4322bd2a7749724879683fc3912cb542f19906c83bcc1a52132556427170b2",
+      "size": 4113088,
+      "metadata_source": "tools/install_local_ocr.py existing pinned private OCR asset"
+    },
+    {
+      "kind": "model",
+      "filename": "rus.traineddata",
+      "url": "https://raw.githubusercontent.com/tesseract-ocr/tessdata_fast/87416418657359cb625c412a48b6e1d6d41c29bd/rus.traineddata",
+      "sha256": "e16e5e036cce1d9ec2b00063cf8b54472625b9e14d893a169e2b0dedeb4df225",
+      "size": 3861738,
+      "metadata_source": "tools/install_local_ocr.py existing pinned private OCR asset"
+    },
+    {
+      "kind": "model-license",
+      "filename": "LICENSE",
+      "url": "https://raw.githubusercontent.com/tesseract-ocr/tessdata_fast/87416418657359cb625c412a48b6e1d6d41c29bd/LICENSE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "size": 11358,
+      "metadata_source": "SHA256 and length computed from exact public URL on 2026-09-26; LF bytes"
+    }
+  ]
+}

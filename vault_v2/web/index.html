@@ -1,0 +1,575 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#262624">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="apple-touch-icon" href="/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Vault</title>
+<style>
+:root{
+  --bg:#faf9f5; --panel:#ffffff; --line:#e7e3da; --ink:#2c2a26; --dim:#7d766a;
+  --accent:#d97757; --accent-soft:#f6ece7; --bar:#262624; --bar-ink:#e9e6df;
+  --radius:14px;
+}
+@media (prefers-color-scheme: dark){
+  :root{ --bg:#1f1e1c; --panel:#2a2927; --line:#3b3934; --ink:#ece9e2; --dim:#9b948a;
+         --accent-soft:#3a2b25; --bar:#171614; --bar-ink:#ece9e2; }
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%;overflow:hidden}
+body{
+  background:var(--bg); color:var(--ink);
+  font:15px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  display:flex; flex-direction:column;
+  padding-top:env(safe-area-inset-top); padding-bottom:env(safe-area-inset-bottom);
+}
+button,input,textarea{font:inherit;color:inherit}
+
+/* ---- top bar ---- */
+header{
+  display:flex; align-items:center; gap:10px; padding:10px 14px;
+  border-bottom:1px solid var(--line); background:var(--panel); flex:none;
+}
+header h1{font-size:16px;font-weight:600;margin:0;flex:1}
+#dot{width:8px;height:8px;border-radius:50%;background:#c0bab0;flex:none}
+#dot.ok{background:#5d9c6a} #dot.bad{background:#c0553f}
+.icon-btn{background:none;border:0;padding:6px;color:var(--dim);font-size:17px;border-radius:8px}
+.icon-btn:active{background:var(--accent-soft)}
+
+/* ---- views ---- */
+main{flex:1;overflow:hidden;position:relative}
+.view{position:absolute;inset:0;display:none;flex-direction:column}
+.view.on{display:flex}
+
+/* ---- pane selector ---- */
+#panebar{display:flex;gap:6px;padding:8px 10px;flex:none}
+#panebar button{
+  flex:1;padding:7px 4px;border:1px solid var(--line);background:var(--panel);
+  border-radius:10px;font-size:13px;color:var(--dim)
+}
+#panebar button.on{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
+#crumb{padding:0 16px 6px;font-size:12px;color:var(--dim);flex:none;
+       white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* ---- lists ---- */
+.scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:0 10px 90px}
+.row{
+  display:flex;align-items:center;gap:12px;padding:11px 12px;background:var(--panel);
+  border:1px solid var(--line);border-radius:var(--radius);margin-bottom:7px;
+}
+.row:active{background:var(--accent-soft)}
+.row .ic{font-size:19px;width:22px;text-align:center;flex:none}
+.row .tx{flex:1;min-width:0}
+.row .nm{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.row .sb{font-size:12px;color:var(--dim);margin-top:2px;
+         white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.row .more{background:none;border:0;color:var(--dim);font-size:20px;padding:2px 6px;flex:none}
+.shelf{color:var(--accent);font-weight:600}
+.empty{text-align:center;color:var(--dim);padding:40px 20px;font-size:14px}
+
+/* ---- floating upload ---- */
+#fab{
+  position:absolute;right:16px;bottom:16px;width:54px;height:54px;border-radius:50%;
+  background:var(--accent);color:#fff;border:0;font-size:26px;line-height:1;
+  box-shadow:0 4px 14px rgba(0,0,0,.25)
+}
+#fab:active{transform:scale(.94)}
+
+/* ---- chat ---- */
+#chatscroll{flex:1;overflow-y:auto;padding:12px 12px 4px;display:flex;flex-direction:column;gap:10px}
+.bub{max-width:82%;padding:9px 13px;border-radius:16px;white-space:pre-wrap;word-wrap:break-word}
+.bub.user{align-self:flex-end;background:var(--accent);color:#fff;border-bottom-right-radius:5px}
+.bub.agent{align-self:flex-start;background:var(--panel);border:1px solid var(--line);border-bottom-left-radius:5px}
+.bub.sys{align-self:center;background:none;color:var(--dim);font-size:12px;text-align:center;max-width:95%}
+#composer{display:flex;gap:8px;padding:8px 10px;border-top:1px solid var(--line);background:var(--panel);flex:none}
+#msg{flex:1;resize:none;height:42px;max-height:120px;padding:10px 12px;border:1px solid var(--line);
+     border-radius:12px;background:var(--bg)}
+#sendbtn{background:var(--accent);color:#fff;border:0;border-radius:12px;padding:0 16px;font-weight:600}
+#sendbtn:disabled{opacity:.45}
+
+/* ---- tasks / health ---- */
+.tick{width:22px;height:22px;flex:none;border:1.5px solid var(--dim);border-radius:6px;
+      display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px}
+.tick.on{background:var(--accent);border-color:var(--accent)}
+.done .nm{text-decoration:line-through;color:var(--dim)}
+.quote{font-size:12px;color:var(--dim);margin-top:3px;font-style:italic;
+       display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.yr{font-weight:700;font-size:13px;color:var(--dim);padding:14px 6px 6px;letter-spacing:.06em}
+.note{padding:10px 16px;font-size:12px;color:var(--dim);border-bottom:1px solid var(--line);flex:none}
+
+/* ---- bottom tabs ---- */
+nav{display:flex;background:var(--bar);flex:none;padding-bottom:env(safe-area-inset-bottom)}
+nav button{flex:1;background:none;border:0;padding:9px 2px 11px;color:#8b857c;font-size:10px}
+nav button .g{display:block;font-size:19px;margin-bottom:2px;filter:grayscale(1) opacity(.75)}
+nav button.on{color:var(--bar-ink)} nav button.on .g{filter:none}
+
+/* ---- sheets ---- */
+#veil{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;z-index:20}
+#veil.on{display:block}
+#sheet{
+  position:fixed;left:0;right:0;bottom:0;z-index:21;background:var(--panel);
+  border-radius:20px 20px 0 0;padding:8px 10px calc(14px + env(safe-area-inset-bottom));
+  transform:translateY(102%);transition:transform .2s ease;
+  max-height:72vh;overflow-y:auto
+}
+#sheet.on{transform:translateY(0)}
+#sheet h3{margin:8px 12px 10px;font-size:14px;font-weight:600;
+          white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#sheet button{
+  display:block;width:100%;text-align:left;background:none;border:0;
+  padding:13px 14px;border-radius:12px;font-size:15px
+}
+#sheet button:active{background:var(--accent-soft)}
+#sheet button.warn{color:#c0553f}
+#grab{width:38px;height:4px;border-radius:2px;background:var(--line);margin:6px auto 2px}
+
+/* ---- key screen / toast ---- */
+#gate{position:fixed;inset:0;z-index:30;background:var(--bg);display:none;
+      flex-direction:column;justify-content:center;padding:28px;gap:14px}
+#gate.on{display:flex}
+#gate h2{margin:0;font-size:20px} #gate p{margin:0;color:var(--dim);font-size:13px}
+#gate input{padding:13px;border:1px solid var(--line);border-radius:12px;background:var(--panel)}
+#gate button{padding:13px;border:0;border-radius:12px;background:var(--accent);color:#fff;font-weight:600}
+#toast{position:fixed;left:50%;bottom:78px;transform:translateX(-50%);z-index:40;
+       background:var(--bar);color:var(--bar-ink);padding:9px 16px;border-radius:20px;
+       font-size:13px;opacity:0;transition:opacity .2s;pointer-events:none;max-width:88%;text-align:center}
+#toast.on{opacity:1}
+#reader{position:fixed;inset:0;z-index:25;background:var(--bg);display:none;flex-direction:column}
+#reader.on{display:flex}
+#reader pre{flex:1;overflow:auto;margin:0;padding:16px;white-space:pre-wrap;
+            word-wrap:break-word;font:13px/1.55 ui-monospace,Menlo,Consolas,monospace}
+</style>
+</head>
+<body>
+
+<header>
+  <span id="dot"></span>
+  <h1 id="title">Vault</h1>
+  <button class="icon-btn" id="refresh" title="Refresh">&#x21bb;</button>
+</header>
+
+<main>
+  <!-- FILES -->
+  <section class="view on" id="v-files">
+    <div id="panebar">
+      <button data-pane="staging" class="on">Staging</button>
+      <button data-pane="documents">Documents</button>
+      <button data-pane="personal">Personal</button>
+    </div>
+    <div id="crumb">/</div>
+    <div class="scroll" id="filelist"></div>
+    <button id="fab">+</button>
+    <input type="file" id="picker" multiple hidden>
+  </section>
+
+  <!-- CHAT -->
+  <section class="view" id="v-chat">
+    <div class="note" id="chatnote">agent sees only Staging</div>
+    <div id="chatscroll"></div>
+    <div id="composer">
+      <textarea id="msg" rows="1" placeholder="Ask about the files in Staging…"></textarea>
+      <button id="sendbtn">Send</button>
+    </div>
+  </section>
+
+  <!-- TASKS -->
+  <section class="view" id="v-tasks">
+    <div class="note" id="tasknote">every task quotes the document that says it</div>
+    <div class="scroll" id="tasklist"></div>
+  </section>
+
+  <!-- HEALTH -->
+  <section class="view" id="v-health">
+    <div class="note" id="healthnote"></div>
+    <div class="scroll" id="healthlist"></div>
+  </section>
+
+  <!-- MONITOR -->
+  <section class="view" id="v-monitor">
+    <div class="scroll" id="monitorbody"></div>
+  </section>
+</main>
+
+<nav>
+  <button data-view="files" class="on"><span class="g">&#128193;</span>Files</button>
+  <button data-view="chat"><span class="g">&#128172;</span>Chat</button>
+  <button data-view="tasks"><span class="g">&#9745;</span>Tasks</button>
+  <button data-view="health"><span class="g">&#10084;</span>Health</button>
+  <button data-view="monitor"><span class="g">&#8986;</span>Watch</button>
+</nav>
+
+<div id="veil"></div>
+<div id="sheet"><div id="grab"></div><h3 id="sheettitle"></h3><div id="sheetbody"></div></div>
+
+<div id="reader">
+  <header><h1 id="readername"></h1><button class="icon-btn" id="readerclose">&#10005;</button></header>
+  <pre id="readertext"></pre>
+</div>
+
+<div id="gate">
+  <h2>Pair this browser</h2>
+  <p id="gatehow">On the PC open Phone… → <b>Add browser…</b> and scan the QR with this phone's camera
+     (Tailscale on). This browser then gets a key of its own, kept on this device only.</p>
+  <p id="paircode" style="font-size:28px;font-weight:600;letter-spacing:4px;text-align:center"></p>
+  <details id="oldkey"><summary>I have the old shared key</summary>
+    <input id="keyin" type="password" autocomplete="off" placeholder="key">
+    <button id="keygo">Connect</button>
+  </details>
+  <p id="gateerr" style="color:#c0553f"></p>
+</div>
+
+<div id="toast"></div>
+
+<script>
+"use strict";
+const $ = s => document.querySelector(s);
+const PANES = ["staging","documents","personal"];
+const TITLE = {staging:"Staging",documents:"Documents",personal:"Personal"};
+/* An old QR carried the shared key itself: still accepted until the owner revokes it. */
+const fromUrl = new URLSearchParams(location.search).get("key");
+if(fromUrl){ localStorage.setItem("vaultKey", fromUrl);
+             history.replaceState(null, "", location.pathname); }
+/* A new QR carries a one-time pairing ticket after '#', which never reaches a server log. */
+const PAIR_TICKET = location.hash.startsWith("#pair=") ? location.hash.slice(6) : "";
+if(PAIR_TICKET) history.replaceState(null, "", location.pathname);
+let KEY = localStorage.getItem("vaultKey") || "";
+let pane = "staging", rel = "", items = [], busy = false;
+
+/* ---------- transport ---------- */
+async function api(path, opts){
+  const o = Object.assign({headers:{}}, opts||{});
+  o.headers["Authorization"] = "Bearer " + KEY;
+  const r = await fetch(path, o);
+  if(r.status === 401){ openGate("key rejected"); throw new Error("bad key"); }
+  const data = await r.json().catch(()=>({error:"bad reply"}));
+  if(!r.ok) throw new Error(data.error || ("HTTP " + r.status));
+  return data;
+}
+const post = (path, body) => api(path, {method:"POST",
+  headers:{"Content-Type":"application/json"}, body:JSON.stringify(body)});
+
+function toast(t){ const el=$("#toast"); el.textContent=t; el.classList.add("on");
+  clearTimeout(toast._t); toast._t=setTimeout(()=>el.classList.remove("on"),2200); }
+function live(ok){ $("#dot").className = ok ? "ok" : "bad"; }
+
+/* ---------- formatting ---------- */
+function size(n){
+  if(n < 1024) return n + " B";
+  if(n < 1048576) return (n/1024).toFixed(n<10240?1:0) + " KB";
+  return (n/1048576).toFixed(n<10485760?1:0) + " MB";
+}
+function when(ts){
+  const d = new Date(ts*1000), p = x => String(x).padStart(2,"0");
+  return String(d.getFullYear()).slice(2)+"-"+p(d.getMonth()+1)+"-"+p(d.getDate())+" "+p(d.getHours())+":"+p(d.getMinutes());
+}
+const esc = s => String(s??"").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+/* ---------- files ---------- */
+async function loadFiles(){
+  try{
+    const d = await api("/api/files?pane=" + pane + "&rel=" + encodeURIComponent(rel));
+    items = d.items; live(true);
+  }catch(e){ live(false); $("#filelist").innerHTML = '<div class="empty">'+esc(e.message)+'</div>'; return; }
+  $("#crumb").textContent = "/" + TITLE[pane] + (rel ? "/" + rel : "");
+  const out = [];
+  if(rel) out.push('<div class="row" data-up="1"><span class="ic">&#8617;</span><div class="tx"><div class="nm">..</div></div></div>');
+  items.forEach((it,i) => {
+    const shelf = it.shelf ? '<span class="shelf">'+esc(it.shelf)+(it.confirmed?"":" ?")+'</span> · ' : "";
+    const sub = it.dir ? when(it.modified) : shelf + size(it.size) + " · " + when(it.modified);
+    out.push(
+      '<div class="row" data-i="'+i+'"><span class="ic">'+(it.dir?"&#128193;":"&#128196;")+'</span>'+
+      '<div class="tx"><div class="nm">'+esc(it.name)+'</div><div class="sb">'+sub+'</div></div>'+
+      '<button class="more" data-more="'+i+'">&#8942;</button></div>');
+  });
+  $("#filelist").innerHTML = out.join("") || '<div class="empty">empty</div>';
+}
+
+$("#filelist").addEventListener("click", e => {
+  const more = e.target.closest("[data-more]");
+  if(more){ e.stopPropagation(); return fileSheet(items[+more.dataset.more]); }
+  const row = e.target.closest(".row"); if(!row) return;
+  if(row.dataset.up !== undefined){ rel = rel.split("/").slice(0,-1).join("/"); return loadFiles(); }
+  const it = items[+row.dataset.i];
+  if(it.dir){ rel = it.rel; loadFiles(); } else { fileSheet(it); }
+});
+
+$("#panebar").addEventListener("click", e => {
+  const b = e.target.closest("[data-pane]"); if(!b) return;
+  setPane(b.dataset.pane);
+});
+function setPane(p){
+  pane = p; rel = "";
+  document.querySelectorAll("#panebar button").forEach(b => b.classList.toggle("on", b.dataset.pane===p));
+  loadFiles();
+}
+/* swipe between panes */
+(function(){
+  let x0=null, y0=null;
+  const el = $("#filelist");
+  el.addEventListener("touchstart", e => { x0=e.touches[0].clientX; y0=e.touches[0].clientY; }, {passive:true});
+  el.addEventListener("touchend", e => {
+    if(x0===null) return;
+    const dx = e.changedTouches[0].clientX - x0, dy = e.changedTouches[0].clientY - y0;
+    x0 = null;
+    if(Math.abs(dx) < 60 || Math.abs(dx) < Math.abs(dy)*1.6) return;
+    const i = PANES.indexOf(pane) + (dx < 0 ? 1 : -1);
+    if(i >= 0 && i < PANES.length) setPane(PANES[i]);
+  }, {passive:true});
+})();
+
+/* ---------- action sheet ---------- */
+function sheet(title, buttons){
+  $("#sheettitle").textContent = title;
+  $("#sheetbody").innerHTML = "";
+  buttons.forEach(b => {
+    const el = document.createElement("button");
+    el.textContent = b.label;
+    if(b.warn) el.className = "warn";
+    el.onclick = () => { closeSheet(); b.run(); };
+    $("#sheetbody").appendChild(el);
+  });
+  $("#veil").classList.add("on"); $("#sheet").classList.add("on");
+}
+function closeSheet(){ $("#veil").classList.remove("on"); $("#sheet").classList.remove("on"); }
+$("#veil").onclick = closeSheet;
+
+function fileSheet(it){
+  const b = [];
+  if(!it.dir && it.view === "TEXT") b.push({label:"Open", run:()=>openReader(it)});
+  if(!it.dir && it.view === "IMAGE") b.push({label:"Open the picture", run:()=>openPicture(it)});
+  // Chrome renders a PDF itself; handing it a tab beats reimplementing a reader.
+  if(!it.dir && it.view === "PDF") b.push({label:"Open the scan", run:()=>openScan(it)});
+  PANES.filter(p => p !== pane).forEach(p => {
+    b.push({label:"Copy to " + TITLE[p], run:()=>transfer(it,p,false)});
+    b.push({label:"Move to " + TITLE[p], run:()=>transfer(it,p,true)});
+  });
+  b.push({label:"Move to Trash", warn:true, run:()=>trash(it)});
+  sheet(it.name, b);
+}
+async function transfer(it, to, move){
+  try{ const r = await post("/api/transfer", {pane, rel:it.rel, to, move});
+       toast((move?"moved to ":"copied to ") + TITLE[to] + ": " + r.name); loadFiles(); }
+  catch(e){ toast(e.message); }
+}
+async function trash(it){
+  if(!confirm("Move “" + it.name + "” to Trash?\nIt can be restored on the PC.")) return;
+  try{ await post("/api/trash", {pane, rel:it.rel}); toast("moved to Trash"); loadFiles(); }
+  catch(e){ toast(e.message); }
+}
+
+/* ---------- reader ---------- */
+/* The key never rides in a URL: the file is fetched with the header and shown
+   from a local object URL, which is released when the reader closes. */
+let OBJECT_URL = null;
+async function blobObjectUrl(it){
+  const r = await fetch("/api/blob?pane=" + pane + "&rel=" + encodeURIComponent(it.rel),
+                        {headers:{Authorization:"Bearer " + KEY}});
+  if(r.status === 401){ openGate("key rejected"); throw new Error("bad key"); }
+  if(!r.ok) throw new Error("HTTP " + r.status);
+  if(OBJECT_URL) URL.revokeObjectURL(OBJECT_URL);
+  OBJECT_URL = URL.createObjectURL(await r.blob());
+  return OBJECT_URL;
+}
+function releaseObjectUrl(){ if(OBJECT_URL){ URL.revokeObjectURL(OBJECT_URL); OBJECT_URL = null; } }
+
+async function openScan(it){
+  try{ window.open(await blobObjectUrl(it), "_blank"); }
+  catch(e){ toast(e.message); }
+}
+
+async function openPicture(it){
+  $("#readername").textContent = it.name;
+  $("#readertext").innerHTML = "";
+  $("#reader").classList.add("on");
+  const img = document.createElement("img");
+  img.alt = it.name;
+  img.style.cssText = "max-width:100%;height:auto;display:block;margin:0 auto";
+  img.onerror = () => { $("#readertext").textContent = "this picture could not be loaded"; };
+  try{ img.src = await blobObjectUrl(it); }
+  catch(e){ $("#readertext").textContent = "this picture could not be loaded"; return; }
+  $("#readertext").appendChild(img);
+}
+
+async function openReader(it){
+  try{
+    const d = await api("/api/file?pane=" + pane + "&rel=" + encodeURIComponent(it.rel));
+    $("#readername").textContent = d.name;
+    $("#readertext").innerHTML = "";
+    $("#readertext").textContent = d.text;
+    $("#reader").classList.add("on");
+  }catch(e){ toast(e.message); }
+}
+$("#readerclose").onclick = () => { $("#reader").classList.remove("on"); releaseObjectUrl(); };
+
+/* ---------- upload ---------- */
+$("#fab").onclick = () => $("#picker").click();
+$("#picker").onchange = async e => {
+  const files = [...e.target.files]; e.target.value = "";
+  for(const f of files){
+    const fd = new FormData(); fd.append("file", f, f.name);
+    try{
+      const r = await fetch("/api/upload", {method:"POST", headers:{Authorization:"Bearer "+KEY}, body:fd});
+      const d = await r.json();
+      if(!r.ok) throw new Error(d.error || "upload failed");
+      toast("into Staging: " + d.name);
+    }catch(err){ toast(err.message); }
+  }
+  if(pane !== "staging") setPane("staging"); else loadFiles();
+};
+
+/* ---------- chat ---------- */
+function bubble(text, kind){
+  const el = document.createElement("div");
+  el.className = "bub " + kind; el.textContent = text;
+  $("#chatscroll").appendChild(el);
+  $("#chatscroll").scrollTop = $("#chatscroll").scrollHeight;
+  return el;
+}
+async function loadChat(){
+  try{
+    const d = await api("/api/chat");
+    $("#chatnote").textContent = d.backend + " · agent sees only Staging";
+    $("#chatscroll").innerHTML = "";
+    d.history.forEach(m => bubble(m.content, m.role === "user" ? "user" : "agent"));
+    if(!d.history.length) bubble("Same conversation as the vault window on the PC.", "sys");
+    $("#sendbtn").disabled = !d.ready;
+  }catch(e){ $("#chatnote").textContent = e.message; }
+}
+async function send(){
+  const t = $("#msg").value.trim();
+  if(!t || busy) return;
+  $("#msg").value = ""; busy = true; $("#sendbtn").disabled = true;
+  bubble(t, "user");
+  const pending = bubble("…", "agent");
+  try{ const d = await post("/api/chat", {text:t}); pending.textContent = d.reply; }
+  catch(e){ pending.textContent = "Failed: " + e.message; }
+  busy = false; $("#sendbtn").disabled = false;
+  $("#chatscroll").scrollTop = $("#chatscroll").scrollHeight;
+}
+$("#sendbtn").onclick = send;
+$("#msg").addEventListener("input", e => {
+  e.target.style.height = "42px";
+  e.target.style.height = Math.min(e.target.scrollHeight, 120) + "px";
+});
+
+/* ---------- tasks ---------- */
+async function loadTasks(){
+  try{
+    const d = await api("/api/tasks"); live(true);
+    const open = d.tasks.filter(t => !t.done).length;
+    $("#tasknote").textContent = open + " open · " + (d.tasks.length-open) +
+      " done · every task quotes the document that says it";
+    $("#tasklist").innerHTML = d.tasks.map(t =>
+      '<div class="row'+(t.done?" done":"")+'" data-task="'+esc(t.id)+'" data-done="'+(t.done?1:0)+'">'+
+      '<span class="tick'+(t.done?" on":"")+'">'+(t.done?"&#10003;":"")+'</span>'+
+      '<div class="tx"><div class="nm" style="white-space:normal">'+esc(t.title)+
+      (t.due?' <span class="shelf">· due '+esc(t.due)+'</span>':'')+'</div>'+
+      '<div class="quote">'+esc(t.doc)+' — “'+esc(t.quote)+'”</div></div></div>').join("")
+      || '<div class="empty">no tasks yet — use “Find tasks” in the vault window</div>';
+  }catch(e){ live(false); $("#tasklist").innerHTML = '<div class="empty">'+esc(e.message)+'</div>'; }
+}
+$("#tasklist").addEventListener("click", async e => {
+  const row = e.target.closest("[data-task]"); if(!row) return;
+  try{ await post("/api/task", {id:row.dataset.task, done: row.dataset.done !== "1"}); loadTasks(); }
+  catch(err){ toast(err.message); }
+});
+
+/* ---------- health ---------- */
+async function loadHealth(){
+  try{
+    const d = await api("/api/health"); live(true);
+    $("#healthnote").textContent = d.summary +
+      " · a reading of your own documents, not a medical record and not advice";
+    const out = [];
+    d.years.forEach(y => {
+      out.push('<div class="yr">'+esc(y.year)+'</div>');
+      y.entries.forEach(e => out.push(
+        '<div class="row"><span class="ic">&#9679;</span><div class="tx">'+
+        '<div class="nm" style="white-space:normal">'+esc(e.label)+'</div>'+
+        '<div class="sb">'+esc(e.date||"undated")+' · '+esc(e.kind)+'</div>'+
+        '<div class="quote">'+esc(e.doc)+' — “'+esc(e.quote)+'”</div></div></div>'));
+    });
+    $("#healthlist").innerHTML = out.join("") ||
+      '<div class="empty">nothing recorded yet — use “Read documents” in the vault window</div>';
+  }catch(e){ live(false); $("#healthlist").innerHTML = '<div class="empty">'+esc(e.message)+'</div>'; }
+}
+
+/* ---------- monitor ---------- */
+async function loadMonitor(){
+  try{
+    const d = await api("/api/monitor");
+    $("#monitorbody").innerHTML = '<div class="empty">'+esc(d.note)+'</div>';
+  }catch(e){ $("#monitorbody").innerHTML = '<div class="empty">'+esc(e.message)+'</div>'; }
+}
+
+/* ---------- navigation ---------- */
+const LOAD = {files:loadFiles, chat:loadChat, tasks:loadTasks, health:loadHealth, monitor:loadMonitor};
+let view = "files";
+document.querySelector("nav").addEventListener("click", e => {
+  const b = e.target.closest("[data-view]"); if(!b) return;
+  view = b.dataset.view;
+  document.querySelectorAll("nav button").forEach(x => x.classList.toggle("on", x===b));
+  document.querySelectorAll(".view").forEach(v => v.classList.toggle("on", v.id === "v-"+view));
+  LOAD[view]();
+});
+$("#refresh").onclick = () => LOAD[view]();
+
+/* ---------- key gate ---------- */
+function openGate(err){ $("#gateerr").textContent = err||""; $("#gate").classList.add("on"); }
+$("#keygo").onclick = async () => {
+  const k = $("#keyin").value.trim(); if(!k) return;
+  KEY = k;
+  try{ await api("/api/tasks"); localStorage.setItem("vaultKey", k);
+       $("#gate").classList.remove("on"); LOAD[view](); }
+  catch(e){ $("#gateerr").textContent = "key rejected"; }
+};
+$("#keyin").addEventListener("keydown", e => { if(e.key === "Enter") $("#keygo").click(); });
+
+/* ---------- pairing: claim the ticket, show the code, wait for the PC ---------- */
+async function pairBrowser(ticket){
+  openGate("");
+  $("#gatehow").textContent = "Pairing… check that the PC window shows the same six digits, then press Confirm there.";
+  const name = "Browser · " + (navigator.userAgentData?.platform || navigator.platform || "phone");
+  let claim;
+  try{
+    const r = await fetch("/api/pair/claim", {method:"POST", headers:{"Content-Type":"application/json"},
+                                               body:JSON.stringify({ticket, name, kind:"browser"})});
+    claim = await r.json();
+    if(!r.ok) throw new Error(claim.error || ("HTTP " + r.status));
+  }catch(e){ $("#gatehow").textContent = ""; $("#gateerr").textContent = e.message; return false; }
+  $("#paircode").textContent = claim.code.slice(0,3) + " " + claim.code.slice(3);
+  for(let i = 0; i < 150; i++){
+    await new Promise(res => setTimeout(res, 2000));
+    let st;
+    try{
+      const r = await fetch("/api/pair/status", {method:"POST", headers:{"Content-Type":"application/json"},
+                                                  body:JSON.stringify({claim_id: claim.claim_id})});
+      st = await r.json();
+    }catch(e){ continue; }
+    if(st.state === "confirmed"){
+      KEY = st.token; localStorage.setItem("vaultKey", KEY);
+      $("#paircode").textContent = ""; $("#gate").classList.remove("on");
+      toast("paired"); return true;
+    }
+    if(st.state === "rejected" || st.state === "expired"){
+      $("#paircode").textContent = "";
+      $("#gateerr").textContent = st.state === "rejected" ? "the PC rejected this pairing" : "the pairing expired — try again";
+      return false;
+    }
+  }
+  $("#paircode").textContent = ""; $("#gateerr").textContent = "the pairing expired — try again";
+  return false;
+}
+
+(async function start(){
+  if(PAIR_TICKET && !(await pairBrowser(PAIR_TICKET))) return;
+  if(!KEY) return openGate("");
+  try{ await api("/api/tasks"); }catch(e){ return; }
+  loadFiles();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+*.log
+*.pyc
+.pytest_cache/
+.venv/
+*.egg-info/
+build/
+dist/
+__pycache__/
+data/
+shots/
+vault-v2-demo/
+# The release APK is copied in by the build, not kept in git.
+vault_v2/web/vault.apk
+vault_v2/web/vault-release.json
+vault_v2/web/vault-release.json.sig

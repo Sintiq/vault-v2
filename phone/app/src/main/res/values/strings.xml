@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Vault</string>
+    <string name="input_service_description">Lets the vault agent tap and swipe on this
+        phone, for a few minutes at a time and only after you allow it. It cannot read
+        what is on the screen: it asks Android for no screen contents at all.</string>
+</resources>
