@@ -1,12 +1,176 @@
 <!doctype html>
-<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Vault V2 — free voluntary download</title>
-<style>body{max-width:48rem;margin:4rem auto;padding:0 1.2rem;font:18px/1.55 system-ui;color:#202b36}a{color:#145ca8}small{color:#56616c}</style>
-<h1>Vault V2 0.1.0</h1>
-<p>A local-first personal archive for Windows with an Android companion. Free and voluntary.</p>
-<p><a href="https://github.com/Sintiq/vault-v2/releases/tag/v0.1.0">Download the release</a> ·
-<a href="https://github.com/Sintiq/vault-v2/blob/main/START-HERE.md">Installation and safety notes</a> ·
-<a href="https://github.com/Sintiq/vault-v2">Source</a></p>
-<p>The Windows installer includes the signed phone companion. Official Tailscale accounts/apps are needed for phone pairing; follow the setup wizard.</p>
-<p><small>No paid Windows Authenticode certificate: Windows may show an unknown-publisher warning. Do not disable protection. Updates require your approval. Local document work uses separately installed Ollama; an explicitly selected cloud fallback is not local-only. Back up important data.</small></p>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Vault V2: a free local-first personal document archive for Windows, with an optional Android companion and local AI.">
+  <meta name="color-scheme" content="light">
+  <title>Vault V2 — your documents, together</title>
+  <style>
+    :root { --ink:#18302b; --muted:#455b55; --accent:#14584a; --paper:#fafcf9; --line:#d7e1da; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--paper); color:var(--ink); font:17px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif; }
+    a { color:var(--accent); text-underline-offset:.2em; }
+    a:hover { text-decoration-thickness:2px; }
+    a:focus-visible { outline:3px solid #a84b1b; outline-offset:5px; }
+    .wrap { max-width:1080px; margin:0 auto; padding:0 24px; }
+    .skip { position:absolute; left:16px; top:-100px; background:white; padding:12px; z-index:1; }
+    .skip:focus { top:12px; }
+    header { border-bottom:1px solid var(--line); }
+    nav { display:flex; justify-content:space-between; align-items:center; gap:20px; padding:22px 0; flex-wrap:wrap; }
+    .brand { font-weight:750; font-size:1.2rem; text-decoration:none; }
+    .nav-links { display:flex; gap:24px; flex-wrap:wrap; font-size:.95rem; }
+    .hero { padding:76px 0 54px; max-width:810px; }
+    .eyebrow { color:var(--accent); font-weight:700; font-size:.9rem; letter-spacing:.06em; text-transform:uppercase; }
+    h1 { font-size:clamp(2.3rem,6vw,4.1rem); line-height:1.12; letter-spacing:-.04em; margin:16px 0 22px; max-width:760px; }
+    .lead { font-size:1.2rem; color:var(--muted); max-width:670px; }
+    .actions { display:flex; align-items:center; gap:18px; flex-wrap:wrap; margin:28px 0 14px; }
+    .button { display:inline-block; padding:13px 22px; border:1px solid var(--accent); border-radius:8px; background:var(--accent); color:white; font-weight:650; text-decoration:none; }
+    .button:hover { background:#0d4438; }
+    .button.secondary { color:var(--accent); background:white; }
+    .note { color:var(--muted); font-size:.92rem; }
+    section { padding:34px 0; }
+    h2 { font-size:1.7rem; letter-spacing:-.02em; margin:0 0 20px; line-height:1.3; }
+    h3 { font-size:1.1rem; line-height:1.35; margin:0 0 10px; }
+    p { margin:0 0 16px; }
+    .grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; }
+    .card { background:white; border:1px solid var(--line); border-radius:12px; padding:25px; }
+    .card p { color:var(--muted); }
+    .card p:last-child { margin-bottom:0; }
+    .step { display:inline-flex; width:32px; height:32px; justify-content:center; align-items:center; background:#e5f1e9; border-radius:50%; color:var(--accent); font-weight:700; margin-bottom:16px; }
+    .notice { border-left:4px solid #a76c29; background:#fff8e9; padding:20px 24px; border-radius:0 8px 8px 0; margin-bottom:24px; }
+    .notice p:last-child { margin-bottom:0; }
+    .privacy { border-top:1px solid var(--line); margin-top:28px; }
+    .privacy ul { padding-left:22px; max-width:830px; }
+    .privacy li { margin-bottom:12px; }
+    footer { border-top:1px solid var(--line); padding:28px 0 38px; margin-top:22px; }
+    footer p { font-size:.9rem; color:var(--muted); }
+    @media (max-width:760px) {
+      .hero { padding-top:44px; }
+      .grid { grid-template-columns:1fr; }
+      .wrap { padding:0 20px; }
+      .nav-links { gap:18px; }
+      section { padding:26px 0; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header>
+    <div class="wrap">
+      <nav aria-label="Main">
+        <a class="brand" href="./">Vault V2</a>
+        <div class="nav-links">
+          <a href="#download">Download</a>
+          <a href="https://github.com/Sintiq/vault-v2/blob/main/START-HERE.md">Setup guide</a>
+          <a href="https://github.com/Sintiq/vault-v2">Source on GitHub</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+  <main id="main" class="wrap">
+    <div class="hero" id="download">
+      <p class="eyebrow">Free · Windows + Android · Local-first</p>
+      <h1>A home for your personal documents.</h1>
+      <p class="lead">Keep files together on your PC. Organize them, find what you need,
+        and take selected documents with you on a paired phone. Add local AI only if you want it.</p>
+      <div class="actions">
+        <a class="button" href="https://github.com/Sintiq/vault-v2/releases/download/v0.1.0/vault-v2-0.1.0-windows.exe">Download for Windows</a>
+        <a class="button secondary" href="https://github.com/Sintiq/vault-v2/blob/main/START-HERE.md">Read the setup guide</a>
+      </div>
+      <p class="note">Version 0.1.0 · English interface · No Python or Visual Studio needed</p>
+      <p class="note"><a href="https://github.com/Sintiq/vault-v2/releases/tag/v0.1.0">All downloads, including Android, source and release notes</a></p>
+    </div>
+
+    <aside class="notice" aria-label="Before installing">
+      <h3>Before you install</h3>
+      <p>This first release has no paid Windows publisher certificate, so Windows may
+        show an unknown-publisher or SmartScreen warning. Do not disable system protection.
+        If you do not trust the download, do not run it. Keep backups of important files.</p>
+    </aside>
+
+    <section aria-labelledby="features">
+      <h2 id="features">Useful on your PC. Optional on your phone.</h2>
+      <div class="grid">
+        <article class="card">
+          <h3>Bring your archive together</h3>
+          <p>Import files, arrange folders and shelves, preview supported documents,
+            and restore items from Trash. Start without AI or a phone.</p>
+        </article>
+        <article class="card">
+          <h3>Get help finding things</h3>
+          <p>Optional local AI suggests categories and helps with document questions.
+            You review its suggestions. Ollama and the model are installed separately.</p>
+        </article>
+        <article class="card">
+          <h3>Take only what you choose</h3>
+          <p>View files on a paired Android phone. With the PC online, take files
+            from Staging for offline use, Save or Share. You choose each action;
+            the agent does not send documents for you.</p>
+        </article>
+      </div>
+    </section>
+
+    <section aria-labelledby="start">
+      <h2 id="start">Start small. Add the rest later.</h2>
+      <div class="grid">
+        <article class="card">
+          <span class="step" aria-hidden="true">1</span>
+          <h3>Install Vault</h3>
+          <p>Run the Windows installer under your own account, review the component
+            terms, then open Vault V2 from the Start menu. Try a harmless sample file.</p>
+        </article>
+        <article class="card">
+          <span class="step" aria-hidden="true">2</span>
+          <h3>Add local AI, if useful</h3>
+          <p>Install Ollama and download the selected model. The archive still works
+            if you skip this step.</p>
+          <p><a href="https://github.com/Sintiq/vault-v2/blob/main/START-HERE.md#add-local-ai-optional">Local AI instructions</a></p>
+        </article>
+        <article class="card">
+          <span class="step" aria-hidden="true">3</span>
+          <h3>Pair a phone, if needed</h3>
+          <p>Install standard Tailscale on both devices and sign in. Vault's Setup
+            wizard helps with the download QR, pairing code and phone PIN.</p>
+          <p><a href="https://github.com/Sintiq/vault-v2/blob/main/START-HERE.md#connect-your-android-phone-optional">Android 10+ walkthrough</a></p>
+        </article>
+      </div>
+    </section>
+
+    <section class="privacy" aria-labelledby="control">
+      <h2 id="control">Know what stays local — and what does not.</h2>
+      <ul>
+        <li>Local document AI uses Ollama. The separate, explicitly selected Claude
+          Code chat option is a cloud service, not local-only mode.</li>
+        <li>Phone access uses your Tailscale network. Paired-phone access, configured
+          reminders and chosen exports can transfer data; local-first is not a
+          promise that nothing leaves the PC.</li>
+        <li>You can revoke paired devices on the PC. Copies already saved or shared
+          outside Vault cannot be recalled.</li>
+        <li>The phone PIN is not full-disk encryption of your PC. Nine wrong PIN
+          attempts erase Vault's app-local data on that phone, not the PC originals.</li>
+        <li>Updates are voluntary and checked against signed release manifests.
+          They do not install automatically. Health records are not medical advice.</li>
+      </ul>
+      <p><a href="https://github.com/Sintiq/vault-v2/blob/main/START-HERE.md#pin-backup-and-safe-sharing">Read the PIN, backup and sharing notes</a></p>
+    </section>
+
+    <section aria-labelledby="help">
+      <h2 id="help">Need a hand?</h2>
+      <p><a href="https://github.com/Sintiq/vault-v2/blob/main/START-HERE.md#if-something-does-not-work">Check common problems</a>
+        or <a href="https://github.com/Sintiq/vault-v2/issues/new?template=bug_report.md">report a problem on GitHub</a>.</p>
+      <p class="note">Issues are public. Never attach personal documents, pairing QR
+        codes, PINs, keys or unredacted logs. Use a harmless sample instead.</p>
+    </section>
+  </main>
+  <footer>
+    <div class="wrap">
+      <p>Vault V2 is free to download and use. No Vault account or subscription.
+        External services have their own accounts and terms.</p>
+      <p><a href="https://github.com/Sintiq/vault-v2/blob/main/LICENSE">Original code: MIT license</a> ·
+        Third-party components retain their own licenses ·
+        <a href="https://github.com/Sintiq/vault-v2/blob/main/DEVELOPMENT.md">Developer reference</a></p>
+    </div>
+  </footer>
+</body>
 </html>
